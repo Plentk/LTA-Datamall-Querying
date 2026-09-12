@@ -1,2 +1,5 @@
 accountKey.local
 secrets/
+account_keys.py
+test.py
+__pycache__/
