@@ -42,8 +42,8 @@ class LTA_DATAMALL_QUERY:
             query_dict = {'BusStopCode': BusStopCode}
         else:
             query_dict = {'BusStopCode': BusStopCode, 'ServiceNo': ServiceNo}
-        bus_arrival = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
-        return bus_arrival
+        bus_arrival_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return bus_arrival_data
 
     def bus_services(self, ServiceNo: str = None):
         '''Returns detailed service information for all buses currently in operation, including: first stop, last stop, peak / offpeak frequency of dispatch.
@@ -233,7 +233,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = "CarParkAvailabilityv2"
+        carpark_availability_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return carpark_availability_data
 
     def estimated_travel_times(self):
         '''Returns estimated travel times of expressways (in segments)
@@ -242,7 +244,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'EstTravelTimes'
+        estimated_travel_times_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return estimated_travel_times_data
 
     def faulty_traffic_lights(self):
         '''Returns alerts of traffic lights that are currently faulty, or currently undergoing scheduled maintenance.
@@ -251,7 +255,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'FaultyTrafficLights'
+        faulty_traffic_lights_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return faulty_traffic_lights_data
 
     def planned_road_openings(self):
         '''Information on planned road openings.
@@ -260,7 +266,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'RoadOpenings'
+        planned_road_openings_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return planned_road_openings_data
 
     def approved_road_works(self):
         '''Information on approved road works to be carried out/being carried out.
@@ -269,7 +277,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'RoadWorks'
+        approved_road_works_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return approved_road_works_data
 
     def traffic_images(self):
         '''Returns links to images of live traffic conditions along expressways and Woodlands & Tuas Checkpoints.
@@ -278,7 +288,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'Traffic-Imagesv2'
+        traffic_images_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return traffic_images_data
 
     def traffic_incidents(self):
         '''Returns incidents currently happening on the roads, such as Accidents, Vehicle Breakdowns, Road Blocks, Traffic Diversions etc.
@@ -287,7 +299,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'TrafficIncidents'
+        traffic_incidents_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return traffic_incidents_data
 
     def traffic_speed_bands(self):
         '''Returns current traffic speeds on expressways and arterial roads, expressed in speed bands.
@@ -296,7 +310,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'v4/TrafficSpeedBands'
+        traffic_speed_bands_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return traffic_speed_bands_data
 
     def vms_emas(self):
         '''Returns traffic advisories (via variable message services) concerning current traffic conditions that are displayed on EMAS signboards along expressways and arterial roads.
@@ -305,16 +321,20 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'VMS'
+        vms_emas_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return vms_emas_data
 
     def traffic_flow(self):
         '''Returns hourly average traffic flow, taken from a representative month of every quarter during 0700-0900 hours.
 
         Update Freq: Quarterly
 
-        :return:
+        :return: Link for downloading file that will expire after 15 minutes.
         '''
-        pass
+        subdirectory = 'TrafficFlow'
+        traffic_flow_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return traffic_flow_data
 
     def flood_alerts(self):
         '''Returns flood alert information across Singapore, provided by PUB.
@@ -323,7 +343,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'PubFloodAlerts'
+        flood_alerts_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return flood_alerts_data
 
     def bicycle_parking(self, Lat: float, Long: float, Dist: float = 0.5):
         '''Returns bicycle parking locations within a radius. The default radius is set as 0.5km
