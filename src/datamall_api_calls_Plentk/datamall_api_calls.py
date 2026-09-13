@@ -37,11 +37,12 @@ class LTA_DATAMALL_QUERY:
         :param ServiceNo: int - Bus service number
         :return:
         '''
+        subdirectory = 'v3/BusArrival'
         if ServiceNo is None:
-            bus_arrival = self.lta_datamall_query(subdirectory='v3/BusArrival', query_dict = {'BusStopCode': BusStopCode})
+            query_dict = {'BusStopCode': BusStopCode}
         else:
-            bus_arrival = self.lta_datamall_query(subdirectory='v3/BusArrival', query_dict = {'BusStopCode': BusStopCode, 'ServiceNo': ServiceNo})
-
+            query_dict = {'BusStopCode': BusStopCode, 'ServiceNo': ServiceNo}
+        bus_arrival = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
         return bus_arrival
 
     def bus_services(self, ServiceNo: str = None):
