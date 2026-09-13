@@ -3,12 +3,19 @@ import requests
 print('Thank you for importing LTA DataMall API Calls Python Package')
 
 class LTA_DATAMALL_QUERY:
+    '''
+    A class representing a LTA DataMall User
+
+    Attributes:
+        api_key (str): User's own registered API key as received from LTA
+    '''
 
     def __init__(self, api_key: str):
-        '''Initialises class LTA_DATAMALL_QUERY for API querying
-        
-        :param api_key: str - User's own registered API key as received from LTA
-        :return: None
+        '''
+        Initialise an LTA_DATAMALL_QUERY object
+
+        Parameters:
+            api_key (str): User's own registered API key as received from LTA
         '''
         if not isinstance(api_key, str):
             raise TypeError('parameter api_key must be string')
