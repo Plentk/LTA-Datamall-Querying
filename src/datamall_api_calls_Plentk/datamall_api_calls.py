@@ -7,11 +7,13 @@ class LTA_DATAMALL_QUERY:
       raise TypeError('parameter api_key should be string')
     self.api_key = api_key
 
-  def lta_datamall_query(self, url_suffix:str, parameters:dict)->str:
+  def lta_datamall_query(self, subdirectory:str, query_dict:dict = {})->str:
+    '''Queries LTA DataMall using provided url_suffix, parameters and initialised API key.
+
+    :param subdirectory: str - subdirectory of `https://datamall2.mytransport.sg/ltaodataservice`
+    :param query_dict: dict - Dictionary of parameter key value pairs
     '''
-    lta_datamall_query(url_suffix:str, parameters:dict, api_key:str)->str
-    '''
-    url = f'''https://datamall2.mytransport.sg/ltaodataservice/{url_suffix}?{''.join([f'{param[0]}={param[1]}' for param in parameters])}'''
+    url = f'''https://datamall2.mytransport.sg/ltaodataservice/{subdirectory}?{''.join([f'{param[0]}={param[1]}' for param in query_dict])}'''
     print(url)
 
     payload = {}
@@ -24,7 +26,7 @@ class LTA_DATAMALL_QUERY:
 
     return response.text
 
-  def bus_arrival(self, BusStopCode:str, ServiceNo:int=None):
+  def bus_arrival(self, BusStopCode:str, ServiceNo:str=None):
     '''Returns real-time Bus Arrival information of Bus Services at a queried Bus Stop, including Est. Arrival Time, Est. Current Location, Est. Current Load.
 
     Update Freq: 20 sec
@@ -34,11 +36,13 @@ class LTA_DATAMALL_QUERY:
     :return:
     '''
     if ServiceNo == None:
-      pass
+      bus_arrival = self.lta_datamall_query(subdirectory='v3/BusArrival', query_dict = {'BusStopCode': BusStopCode})
     else:
-      pass
+      bus_arrival = self.lta_datamall_query(subdirectory='v3/BusArrival', query_dict = {'BusStopCode': BusStopCode, 'ServiceNo': ServiceNo})
 
-  def bus_services(self, ServiceNo:int=None):
+    return bus_arrival
+
+  def bus_services(self, ServiceNo:str=None):
     '''Returns detailed service information for all buses currently in operation, including: first stop, last stop, peak / offpeak frequency of dispatch.
 
     Update Freq: Ad hoc
