@@ -1,9 +1,8 @@
 import requests
-from account_keys import LTA_DATAMALL_API_KEY
 
 class LTA_DATAMALL_QUERY:
 
-  def __init__(self, api_key:str=LTA_DATAMALL_API_KEY):
+  def __init__(self, api_key:str):
     if not isinstance(api_key, str):
       raise TypeError('parameter api_key should be string')
     self.api_key = api_key
