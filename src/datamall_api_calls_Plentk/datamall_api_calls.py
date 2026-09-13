@@ -1,5 +1,6 @@
 import requests
 
+
 class LTA_DATAMALL_QUERY:
 
     def __init__(self, api_key: str):
@@ -139,7 +140,7 @@ class LTA_DATAMALL_QUERY:
         '''Returns detailed information on train service unavailability during scheduled operating hours, such as affected line and stations etc.
 
         Update Freq: Ad hoc
-        
+
         :return:
         '''
         pass
@@ -184,7 +185,7 @@ class LTA_DATAMALL_QUERY:
 
     def gtfs_schedule_train(self):
         '''GTFS Schedule (Train) is a feed specification that defines a common format for static public transportation information. It is composed of a collection of simple files, mostly text files (.txt) that are contained in a single ZIP file.
-    
+
         Each file describes a particular aspect of transit information such as stops, routes, trips, etc. At its most basic form, a GTFS Schedule dataset is composed of files: agency.txt, routes.txt, trips.txt, stops.txt, stop_times.txt, calendar.txt and calendar_dates.txt.
 
         Please refer to General Transit Feed Specification documentation for more details.
@@ -332,7 +333,7 @@ class LTA_DATAMALL_QUERY:
         :param Lat: float Latitude map coordinates of location
         :param Long: float Longitude map coordinates of location
         :param Dist: float Radius in kilometre
-        :return: 
+        :return:
         '''
         pass
 
