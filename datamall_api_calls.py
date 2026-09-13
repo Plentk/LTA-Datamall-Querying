@@ -11,7 +11,7 @@ class LTA_DATAMALL_QUERY:
         :return: None
         '''
         if not isinstance(api_key, str):
-            raise TypeError('parameter api_key should be string')
+            raise TypeError('parameter api_key must be string')
         self.api_key = api_key
 
     def lta_datamall_query(self, subdirectory: str, query_dict: dict = {}) -> str:
@@ -21,6 +21,8 @@ class LTA_DATAMALL_QUERY:
         :param query_dict: dict - Dictionary of parameter key value pairs
         :return:
         '''
+        if not isinstance(subdirectory, str):
+            raise TypeError('parameter subdirectory must be string')
         query = ''.join([f'{param[0]}={param[1]}' for param in query_dict])
         url = f'''https://datamall2.mytransport.sg/ltaodataservice/{subdirectory}?{query}'''
         print(url)
@@ -60,6 +62,7 @@ class LTA_DATAMALL_QUERY:
         :param ServiceNo: int - The bus service number
         :return:
         '''
+        subdirectory = ''
         if ServiceNo is None:
             pass
         else:
