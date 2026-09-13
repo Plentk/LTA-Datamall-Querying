@@ -7,7 +7,7 @@ class LTA_DATAMALL_QUERY:
       raise TypeError('parameter api_key should be string')
     self.api_key = api_key
 
-  def lta_datamall_query(url_suffix:str, parameters:dict, api_key:str=LTA_DATAMALL_API_KEY)->str:
+  def lta_datamall_query(self, url_suffix:str, parameters:dict)->str:
     '''
     lta_datamall_query(url_suffix:str, parameters:dict, api_key:str)->str
     '''
@@ -16,7 +16,7 @@ class LTA_DATAMALL_QUERY:
 
     payload = {}
     headers = {
-      'AccountKey': api_key,
+      'AccountKey': self.api_key,
       'accept': 'application/json'
     }
 
