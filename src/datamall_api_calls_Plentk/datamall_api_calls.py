@@ -8,7 +8,7 @@ class LTA_DATAMALL_QUERY:
             raise TypeError('parameter api_key should be string')
         self.api_key = api_key
 
-    def lta_datamall_query(self, subdirectory: str, query_dict: dict = {})->str:
+    def lta_datamall_query(self, subdirectory: str, query_dict: dict = {}) -> str:
         '''Queries LTA DataMall using provided url_suffix, parameters and initialised API key.
 
         :param subdirectory: str - subdirectory of `https://datamall2.mytransport.sg/ltaodataservice`
@@ -28,7 +28,7 @@ class LTA_DATAMALL_QUERY:
 
         return response.text
 
-    def bus_arrival(self, BusStopCode: str, ServiceNo: str=None):
+    def bus_arrival(self, BusStopCode: str, ServiceNo: str = None):
         '''Returns real-time Bus Arrival information of Bus Services at a queried Bus Stop, including Est. Arrival Time, Est. Current Location, Est. Current Load.
 
         Update Freq: 20 sec
@@ -44,7 +44,7 @@ class LTA_DATAMALL_QUERY:
 
         return bus_arrival
 
-    def bus_services(self, ServiceNo: str=None):
+    def bus_services(self, ServiceNo: str = None):
         '''Returns detailed service information for all buses currently in operation, including: first stop, last stop, peak / offpeak frequency of dispatch.
 
         Update Freq: Ad hoc
@@ -66,18 +66,18 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def bus_stops(self, BusStopCode:str=None):
+    def bus_stops(self, BusStopCode: str = None):
         '''Returns detailed information for all bus stops currently being serviced by buses, including: Bus Stop Code, location coordinates.
 
         :param BusStopCode: str The unique 5-digit identifier for this physical bus stop
         :return:
         '''
-        if BusStopCode == None:
+        if BusStopCode is None:
             pass
         else:
             pass
 
-    def passenger_volume_by_bus_stops(self, date:str=None):
+    def passenger_volume_by_bus_stops(self, date: str = None):
         '''Returns tap in and tap out passenger volume by weekdays and weekends for individual bus stop
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
@@ -87,7 +87,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def passenger_volume_by_origin_destination_bus_stops(self, date:str=None):
+    def passenger_volume_by_origin_destination_bus_stops(self, date: str = None):
         '''Returns number of trips by weekdays and weekends from origin to destination bus stops
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
@@ -97,7 +97,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def passenger_volume_by_origin_destination_train_stations(self, date:str=None):
+    def passenger_volume_by_origin_destination_train_stations(self, date: str = None):
         '''Returns number of trips by weekdays and weekends from origin to destination train stations
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
@@ -107,7 +107,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def passenger_volume_by_train_stations(self, date:str=None):
+    def passenger_volume_by_train_stations(self, date: str = None):
         '''Returns tap in and tap out passenger volume by weekdays and weekends for individual train station
         
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
@@ -153,7 +153,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def station_crowd_density_realtime(self, TrainLine:str):
+    def station_crowd_density_realtime(self, TrainLine: str):
         '''Returns real-time MRT/LRT station crowdedness level of a particular train network line
             
         Update Freq: 10 min
@@ -163,7 +163,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def station_crowd_density_forecast(self, TrainLine:str):
+    def station_crowd_density_forecast(self, TrainLine: str):
         '''Returns forecasted MRT/LRT station crowdedness level of a particular train network line at 30 minutes interval
         
         Update Freq: 24 hrs
@@ -319,7 +319,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def bicycle_parking(self, Lat:float, Long:float, Dist:float=0.5):
+    def bicycle_parking(self, Lat: float, Long: float, Dist: float = 0.5):
         '''Returns bicycle parking locations within a radius. The default radius is set as 0.5km
         
         Update Freq: Monthly
@@ -331,7 +331,7 @@ class LTA_DATAMALL_QUERY:
         '''
         pass
 
-    def geospatial_whole_island(self, ID:str):
+    def geospatial_whole_island(self, ID: str):
         '''Returns the SHP files of the requested geospatial layer
         
         Update Freq: Ad hoc
