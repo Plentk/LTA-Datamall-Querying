@@ -43,7 +43,12 @@ class LTA_DATAMALL_QUERY:
 
         response = requests.request('GET', url, headers=headers, data=payload)
 
-        return response.text
+        response_dict = json.loads(response.text)
+        if response_dict.get('value') is None:
+            raise ValueError('Parameters entered are incorrect')
+        else:
+            data = response_dict.get('value')
+            return data
 
     def bus_arrival(self, BusStopCode: str, ServiceNo: str = None):
         '''Returns real-time Bus Arrival information of Bus Services at a queried Bus Stop, including Est. Arrival Time, Est. Current Location, Est. Current Load.
