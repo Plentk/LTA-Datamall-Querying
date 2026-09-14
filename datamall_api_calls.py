@@ -1,4 +1,5 @@
 import requests
+import json
 
 print('''Thank you for importing LTA DataMall API Calls Python Package''')
 
@@ -33,7 +34,6 @@ class LTA_DATAMALL_QUERY:
             raise TypeError('parameter subdirectory must be string')
         query = ''.join([f'{param[0]}={param[1]}' for param in query_dict])
         url = f'''https://datamall2.mytransport.sg/ltaodataservice/{subdirectory}?{query}'''
-        print(url)
 
         payload = {}
         headers = {
