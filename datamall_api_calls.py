@@ -32,20 +32,19 @@ class LTA_DATAMALL_QUERY:
         '''
         if not isinstance(subdirectory, str):
             raise TypeError('parameter subdirectory must be string')
-        query = ''.join([f'{param[0]}={param[1]}' for param in query_dict])
+        query = '&'.join([f'{param[0]}={param[1]}' for param in query_dict.items()])
         url = f'''https://datamall2.mytransport.sg/ltaodataservice/{subdirectory}?{query}'''
-
         payload = {}
         headers = {
             'AccountKey': self.api_key,
             'accept': 'application/json'
         }
-
         response = requests.request('GET', url, headers=headers, data=payload)
-
         response_dict = json.loads(response.text)
         if response_dict.get('value') is None:
-            raise ValueError('Parameters entered are incorrect')
+            if response_dict.get('odata.metadata'):
+                response_dict.pop('odata.metadata')
+            return response_dict
         else:
             data = response_dict.get('value')
             return data
