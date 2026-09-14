@@ -11,8 +11,7 @@ class LTA_DATAMALL_QUERY:
     '''
 
     def __init__(self, api_key: str):
-        '''
-        Initialise an LTA_DATAMALL_QUERY object
+        '''Initialise an LTA_DATAMALL_QUERY object
 
         Parameters:
             api_key (str): User's own registered API key as received from LTA
@@ -23,10 +22,12 @@ class LTA_DATAMALL_QUERY:
 
     def lta_datamall_query(self, subdirectory: str, query_dict: dict = {}) -> str:
         '''Queries LTA DataMall using provided url_suffix, parameters and initialised API key.
+        Returns 
 
-        :param subdirectory: str - subdirectory of `https://datamall2.mytransport.sg/ltaodataservice`
-        :param query_dict: dict - Dictionary of parameter key value pairs
-        :return:
+
+        Parameters:
+            subdirectory (str): subdirectory of `https://datamall2.mytransport.sg/ltaodataservice`
+            query_dict (dict): Dictionary of parameter key value pairs
         '''
         if not isinstance(subdirectory, str):
             raise TypeError('parameter subdirectory must be string')
@@ -49,8 +50,9 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: 20 sec
 
-        :param BusStopCode: str - Bus stop reference code
-        :param ServiceNo: int - Bus service number
+        Parameters:
+            BusStopCode (str): Bus stop reference code
+            ServiceNo (int): Bus service number
         :return:
         '''
         subdirectory = 'v3/BusArrival'
@@ -66,7 +68,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: Ad hoc
 
-        :param ServiceNo: int - The bus service number
+        Parameters:
+            ServiceNo (int): The bus service number
         :return:
         '''
         subdirectory = ''
@@ -87,7 +90,8 @@ class LTA_DATAMALL_QUERY:
     def bus_stops(self, BusStopCode: str = None):
         '''Returns detailed information for all bus stops currently being serviced by buses, including: Bus Stop Code, location coordinates.
 
-        :param BusStopCode: str The unique 5-digit identifier for this physical bus stop
+        Parameters:
+            BusStopCode (str): The unique 5-digit identifier for this physical bus stop
         :return:
         '''
         if BusStopCode is None:
@@ -100,7 +104,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
 
-        :param date: str - in YYYYMM format. Request for files up to last three months
+        Parameters:
+            date (str): Input in YYYYMM format. Request for files up to last three months
         :return:
         '''
         pass
@@ -110,7 +115,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
 
-        :param date: str - in YYYYMM format. Request for files up to last three months
+        Parameters:
+            date (str): Input in YYYYMM format. Request for files up to last three months
         :return:
         '''
         pass
@@ -120,7 +126,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
 
-        :param date: str - in YYYYMM format. Request for files up to last three months
+        Parameters:
+            date (str): Input in YYYYMM format. Request for files up to last three months
         :return:
         '''
         pass
@@ -130,7 +137,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: By 10th of every month, the passenger volume for previous month data will be generated
 
-        :param date: str - in YYYYMM format. Request for files up to last three months
+        Parameters:
+            date (str): in YYYYMM format. Request for files up to last three months
         :return:
         '''
         pass
@@ -176,7 +184,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: 10 min
 
-        :param TrainLine: str Code of train network line.
+        Parameters:
+            TrainLine (str): Code of train network line.
         :return:
         '''
         pass
@@ -186,7 +195,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: 24 hrs
 
-        :param TrainLine: str Code of train network line.
+        Parameters:
+            TrainLine (str): Code of train network line.
         :return:
         '''
         pass
@@ -369,9 +379,10 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: Monthly
 
-        :param Lat: float Latitude map coordinates of location
-        :param Long: float Longitude map coordinates of location
-        :param Dist: float Radius in kilometre
+        Parameters:
+            Lat (float): Latitude map coordinates of location
+            Long (float): Longitude map coordinates of location
+            Dist (float): Radius in kilometre
         :return:
         '''
         pass
@@ -381,7 +392,8 @@ class LTA_DATAMALL_QUERY:
 
         Update Freq: Ad hoc
 
-        :param ID: str Name of Geospatial Layer
+        Parameters:
+            ID: str Name of Geospatial Layer
         :return:
         '''
         pass
