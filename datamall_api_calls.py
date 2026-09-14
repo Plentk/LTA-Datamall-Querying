@@ -72,11 +72,13 @@ class LTA_DATAMALL_QUERY:
             ServiceNo (int): The bus service number
         :return:
         '''
-        subdirectory = ''
+        subdirectory = 'BusServices'
         if ServiceNo is None:
-            pass
+            query_dict = {}
         else:
-            pass
+            query_dict = {'ServiceNo': ServiceNo}
+        bus_services_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return bus_services_data
 
     def bus_routes(self):
         '''Returns detailed route information for all services currently in operation, including: all bus stops along each route, first/last bus timings for each stop
@@ -85,7 +87,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'BusRoutes'
+        bus_arrival_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return bus_arrival_data
 
     def bus_stops(self, BusStopCode: str = None):
         '''Returns detailed information for all bus stops currently being serviced by buses, including: Bus Stop Code, location coordinates.
@@ -94,10 +98,13 @@ class LTA_DATAMALL_QUERY:
             BusStopCode (str): The unique 5-digit identifier for this physical bus stop
         :return:
         '''
+        subdirectory = 'BusStops'
         if BusStopCode is None:
-            pass
+            query_dict = {}
         else:
-            pass
+            query_dict = {'BusStopCode': BusStopCode}
+        bus_stops_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return bus_stops_data
 
     def passenger_volume_by_bus_stops(self, date: str = None):
         '''Returns tap in and tap out passenger volume by weekdays and weekends for individual bus stop
@@ -106,9 +113,17 @@ class LTA_DATAMALL_QUERY:
 
         Parameters:
             date (str): Input in YYYYMM format. Request for files up to last three months
-        :return:
+        Return:
+            Link for downloading file. Link expires after 15 minutes
         '''
-        pass
+        subdirectory = 'PV/Bus'
+        if date is None:
+            query_dict = {}
+        else:
+            query_dict = {'Date': date}
+        passenger_volume_by_bus_stops_url = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return passenger_volume_by_bus_stops_url
+        
 
     def passenger_volume_by_origin_destination_bus_stops(self, date: str = None):
         '''Returns number of trips by weekdays and weekends from origin to destination bus stops
@@ -119,7 +134,14 @@ class LTA_DATAMALL_QUERY:
             date (str): Input in YYYYMM format. Request for files up to last three months
         :return:
         '''
-        pass
+        subdirectory = 'PV/ODBus'
+        if date is None:
+            query_dict = {}
+        else:
+            query_dict = {'Date': date}
+        passenger_volume_by_origin_destination_bus_stops_url = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return passenger_volume_by_origin_destination_bus_stops_url
+        
 
     def passenger_volume_by_origin_destination_train_stations(self, date: str = None):
         '''Returns number of trips by weekdays and weekends from origin to destination train stations
@@ -130,7 +152,13 @@ class LTA_DATAMALL_QUERY:
             date (str): Input in YYYYMM format. Request for files up to last three months
         :return:
         '''
-        pass
+        subdirectory = 'PV/ODTrain'
+        if date is None:
+            query_dict = {}
+        else:
+            query_dict = {'Date': date}
+        passenger_volume_by_origin_destination_train_stations_url = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return passenger_volume_by_origin_destination_train_stations_url
 
     def passenger_volume_by_train_stations(self, date: str = None):
         '''Returns tap in and tap out passenger volume by weekdays and weekends for individual train station
@@ -141,7 +169,13 @@ class LTA_DATAMALL_QUERY:
             date (str): in YYYYMM format. Request for files up to last three months
         :return:
         '''
-        pass
+        subdirectory = 'PV/Train'
+        if date is None:
+            query_dict = {}
+        else:
+            query_dict = {'Date': date}
+        passenger_volume_by_train_stations_url = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return passenger_volume_by_train_stations_url
 
     def taxi_availability(self):
         '''Returns location coordinates of all Taxis that are currently available for hire. Does not include "Hired" or "Busy" Taxis.
@@ -150,7 +184,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'Taxi-Availability'
+        taxi_availability_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return taxi_availability_data
 
     def taxi_stands(self):
         '''Returns detailed information of Taxi stands, such as location and whether is it barrier free.
@@ -159,16 +195,20 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'TaxiStands'
+        taxi_stands_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return taxi_stands_data
 
-    def train_service_alerts():
+    def train_service_alerts(self):
         '''Returns detailed information on train service unavailability during scheduled operating hours, such as affected line and stations etc.
 
         Update Freq: Ad hoc
 
         :return:
         '''
-        pass
+        subdirectory = 'TrainServiceAlerts'
+        train_service_alerts_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return train_service_alerts_data
 
     def facilities_maintenance(self):
         '''Returns adhoc lift maintenance in MRT stations
@@ -177,7 +217,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'v2/FacilitiesMaintenance'
+        facilities_maintenance_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return facilities_maintenance_data
 
     def station_crowd_density_realtime(self, TrainLine: str):
         '''Returns real-time MRT/LRT station crowdedness level of a particular train network line
@@ -185,10 +227,16 @@ class LTA_DATAMALL_QUERY:
         Update Freq: 10 min
 
         Parameters:
-            TrainLine (str): Code of train network line.
+            TrainLine (str): Code of train network line. Train lines supported: CCL, CEL, CGL, DTL, EWL, NEL, NSL, BPL, SLRT, PLRT, TEL
         :return:
         '''
-        pass
+        subdirectory = 'PCDRealTime'
+        if TrainLine in ['CCL', 'CEL', 'CGL', 'DTL', 'EWL', 'NEL', 'NSL', 'BPL', 'SLRT', 'PLRT', 'TEL']:
+            query_dict = {'TrainLine': TrainLine}
+        else:
+            raise ValueError('Unacceptable value for parameter TrainLine')
+        station_crowd_density_realtime_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return station_crowd_density_realtime_data
 
     def station_crowd_density_forecast(self, TrainLine: str):
         '''Returns forecasted MRT/LRT station crowdedness level of a particular train network line at 30 minutes interval
@@ -196,10 +244,16 @@ class LTA_DATAMALL_QUERY:
         Update Freq: 24 hrs
 
         Parameters:
-            TrainLine (str): Code of train network line.
+            TrainLine (str): Code of train network line. Train lines supported: CCL, CEL, CGL, DTL, EWL, NEL, NSL, BPL, SLRT, PLRT, TEL
         :return:
         '''
-        pass
+        subdirectory = 'PCDForecast'
+        if TrainLine in ['CCL', 'CEL', 'CGL', 'DTL', 'EWL', 'NEL', 'NSL', 'BPL', 'SLRT', 'PLRT', 'TEL']:
+            query_dict = {'TrainLine': TrainLine}
+        else:
+            raise ValueError('Unacceptable value for parameter TrainLine')
+        station_crowd_density_forecast_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return station_crowd_density_forecast_data
 
     def planned_bus_routes(self):
         '''Returns planned new/updated bus routes information.
@@ -208,7 +262,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'PlannedBusRoutes'
+        planned_bus_routes_data = self.lta_datamall_query(subdirectory=subdirectory)
+        return planned_bus_routes_data
 
     def gtfs_schedule_train(self):
         '''GTFS Schedule (Train) is a feed specification that defines a common format for static public transportation information. It is composed of a collection of simple files, mostly text files (.txt) that are contained in a single ZIP file.
@@ -221,7 +277,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'GTFSScheduleTrain'
+        gtfs_schedule_train_link = self.lta_datamall_query(subdirectory=subdirectory)
+        return gtfs_schedule_train_link
 
     def gtfs_realtime_train_service_alerts(self):
         '''GTFS Realtime (Train Service Alerts) is a feed specification that allows public transportation agencies to provide up-to-date information about service alerts allowing users to smoothly plan their trips
@@ -234,7 +292,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'GTFSRealTimeTrain'
+        gtfs_realtime_train_service_alerts_link = self.lta_datamall_query(subdirectory=subdirectory)
+        return gtfs_realtime_train_service_alerts_link
 
     def gtfs_realtime_train_trip_updates_disruption(self):
         '''GTFS Realtime (Train Trip Updates - Disruption) is a feed specification that provides real-time arrival/departure predictions, delays, cancellations for scheduled trips during train service disruptions.
@@ -247,7 +307,9 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'GTFSRealtimeTrainTripUpdates'
+        gtfs_realtime_train_trip_updates_disruption_link = self.lta_datamall_query(subdirectory=subdirectory)
+        return gtfs_realtime_train_trip_updates_disruption_link
 
     def carpark_availability(self):
         '''Returns no. of available lots for HDB, LTA and URA carpark data.
@@ -385,7 +447,10 @@ class LTA_DATAMALL_QUERY:
             Dist (float): Radius in kilometre
         :return:
         '''
-        pass
+        subdirectory = 'BicycleParkingv2'
+        query_dict = {'Lat': Lat, 'Long': Long, 'Dist': Dist}
+        bicycle_parking_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return bicycle_parking_data
 
     def geospatial_whole_island(self, ID: str):
         '''Returns the SHP files of the requested geospatial layer
@@ -396,16 +461,22 @@ class LTA_DATAMALL_QUERY:
             ID: str Name of Geospatial Layer
         :return:
         '''
-        pass
+        subdirectory = 'GeospatialWholeIsland'
+        query_dict = {'ID': ID}
+        geospatial_whole_island_link = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return geospatial_whole_island_link
 
-    def ev_charging_points(self):
+    def ev_charging_points(self, PostalCode: str):
         '''Returns all electric vehicle charging points in Singapore and their availabilities by Postal Code.
 
         Update Freq: 5 min
 
         :return:
         '''
-        pass
+        subdirectory = 'EVChargingPoints'
+        query_dict = {'PostalCode': PostalCode}
+        ev_charging_points_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
+        return ev_charging_points_data
 
     def ev_charging_points_batch(self):
         '''Returns all electric vehicle charging points in Singapore and their availabilities in a single file.
@@ -414,4 +485,6 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        pass
+        subdirectory = 'EVCBatch'
+        ev_charging_points_batch_link = self.lta_datamall_query(subdirectory=subdirectory)
+        return ev_charging_points_batch_link
