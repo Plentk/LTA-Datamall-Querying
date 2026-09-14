@@ -1,6 +1,6 @@
 import requests
 
-print('Thank you for importing LTA DataMall API Calls Python Package')
+print('''Thank you for importing LTA DataMall API Calls Python Package''')
 
 class LTA_DATAMALL_QUERY:
     '''
