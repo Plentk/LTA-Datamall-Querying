@@ -69,32 +69,35 @@ class LTA_DATAMALL_QUERY:
         bus_arrival_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
         return bus_arrival_data
 
-    def bus_services(self, ServiceNo: str = None):
+    def bus_services(self, ServiceNo: str = None, skip: int = 0):
         '''Returns detailed service information for all buses currently in operation, including: first stop, last stop, peak / offpeak frequency of dispatch.
 
         Update Freq: Ad hoc
 
         Parameters:
-            ServiceNo (int): The bus service number
+            ServiceNo (str): The bus service number
+            Skip (int): How many bus services to skip past
         :return:
         '''
         subdirectory = 'BusServices'
-        if ServiceNo is None:
-            query_dict = {}
-        else:
-            query_dict = {'ServiceNo': ServiceNo}
+        query_dict = {'$skip': str(skip)}
+        if ServiceNo is not None:
+            query_dict['ServiceNo'] = ServiceNo
         bus_services_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
         return bus_services_data
 
-    def bus_routes(self):
+    def bus_routes(self, skip: int = 0):
         '''Returns detailed route information for all services currently in operation, including: all bus stops along each route, first/last bus timings for each stop
 
         Update Freq: Ad hoc
 
+        Parameters:
+            skip (int): How many bus route info cells to skip past
         :return:
         '''
         subdirectory = 'BusRoutes'
-        bus_arrival_data = self.lta_datamall_query(subdirectory=subdirectory)
+        query_dict = {'$skip': str(skip)}
+        bus_arrival_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
         return bus_arrival_data
 
     def bus_stops(self, BusStopCode: str = None):
