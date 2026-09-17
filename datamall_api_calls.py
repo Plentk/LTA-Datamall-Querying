@@ -100,7 +100,7 @@ class LTA_DATAMALL_QUERY:
         bus_arrival_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
         return bus_arrival_data
 
-    def bus_stops(self, BusStopCode: str = None):
+    def bus_stops(self, BusStopCode: str = None, skip: int = 0):
         '''Returns detailed information for all bus stops currently being serviced by buses, including: Bus Stop Code, location coordinates.
 
         Parameters:
@@ -108,10 +108,9 @@ class LTA_DATAMALL_QUERY:
         :return:
         '''
         subdirectory = 'BusStops'
-        if BusStopCode is None:
-            query_dict = {}
-        else:
-            query_dict = {'BusStopCode': BusStopCode}
+        query_dict = {'$skip': str(skip)}
+        if BusStopCode is not None:
+            query_dict['BusStopCode'] = BusStopCode
         bus_stops_data = self.lta_datamall_query(subdirectory=subdirectory, query_dict=query_dict)
         return bus_stops_data
 
