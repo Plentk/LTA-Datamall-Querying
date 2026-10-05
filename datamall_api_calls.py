@@ -352,7 +352,7 @@ class LTA_DATAMALL_QUERY:
 
         :return:
         '''
-        subdirectory = 'FaultyTrafficLights'
+        subdirectory = 'v2/FaultyTrafficLights'
         faulty_traffic_lights_data = self.lta_datamall_query(subdirectory=subdirectory)
         return faulty_traffic_lights_data
 
